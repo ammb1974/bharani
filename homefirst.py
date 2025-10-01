@@ -1,7 +1,1 @@
-print("hello world!!")
-print("hello world!!")
-print('When your were here?')
-print("Want to choose")
-print(3+5)
-print("******")
-Print ("the answer is : ")
+print(".",list("1"."2"."3"))
