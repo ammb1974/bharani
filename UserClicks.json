@@ -1,0 +1,242 @@
+[
+  {
+    "timestamp": "2025-08-30 11:19:01",
+    "x": 109,
+    "y": 8,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 43.29,
+    "nearest_anchor_sign": "ပြိဿ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:03",
+    "x": 152,
+    "y": 9,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 21.1,
+    "nearest_anchor_sign": "မိဿ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:08",
+    "x": 58,
+    "y": 8,
+    "is_anchor": true,
+    "anchor_sign": "ပြိဿ",
+    "anchor_index": 0,
+    "distance_to_nearest_anchor": null,
+    "nearest_anchor_sign": null
+  },
+  {
+    "timestamp": "2025-08-30 11:19:11",
+    "x": 32,
+    "y": 6,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 34.71,
+    "nearest_anchor_sign": "ပြိဿ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:18",
+    "x": 6,
+    "y": 40,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 27.66,
+    "nearest_anchor_sign": "မေထုန်"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:21",
+    "x": 39,
+    "y": 72,
+    "is_anchor": true,
+    "anchor_sign": "မေထုန်",
+    "anchor_index": 1,
+    "distance_to_nearest_anchor": null,
+    "nearest_anchor_sign": null
+  },
+  {
+    "timestamp": "2025-08-30 11:19:24",
+    "x": 8,
+    "y": 109,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 33.97,
+    "nearest_anchor_sign": "မေထုန်"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:25",
+    "x": 44,
+    "y": 112,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 18.97,
+    "nearest_anchor_sign": "ကရကဋ်"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:29",
+    "x": 6,
+    "y": 206,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 27.89,
+    "nearest_anchor_sign": "သိဟ်"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:30",
+    "x": 45,
+    "y": 209,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 12.65,
+    "nearest_anchor_sign": "သိဟ်"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:34",
+    "x": 33,
+    "y": 273,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 20.0,
+    "nearest_anchor_sign": "သိဟ်"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:35",
+    "x": 61,
+    "y": 249,
+    "is_anchor": true,
+    "anchor_sign": "ကန်",
+    "anchor_index": 0,
+    "distance_to_nearest_anchor": null,
+    "nearest_anchor_sign": null
+  },
+  {
+    "timestamp": "2025-08-30 11:19:37",
+    "x": 108,
+    "y": 208,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 47.41,
+    "nearest_anchor_sign": "တူ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:38",
+    "x": 152,
+    "y": 209,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 21.1,
+    "nearest_anchor_sign": "တူ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:40",
+    "x": 207,
+    "y": 238,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 27.2,
+    "nearest_anchor_sign": "ဗြိစ္ဆာ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:42",
+    "x": 246,
+    "y": 264,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 13.15,
+    "nearest_anchor_sign": "ဗြိစ္ဆာ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:44",
+    "x": 224,
+    "y": 206,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 41.0,
+    "nearest_anchor_sign": "ဗြိစ္ဆာ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:46",
+    "x": 258,
+    "y": 209,
+    "is_anchor": true,
+    "anchor_sign": "ဓနု",
+    "anchor_index": 0,
+    "distance_to_nearest_anchor": null,
+    "nearest_anchor_sign": null
+  },
+  {
+    "timestamp": "2025-08-30 11:19:47",
+    "x": 206,
+    "y": 109,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 48.75,
+    "nearest_anchor_sign": "မကာရ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:50",
+    "x": 254,
+    "y": 107,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 23.35,
+    "nearest_anchor_sign": "မကာရ"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:52",
+    "x": 233,
+    "y": 75,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 22.0,
+    "nearest_anchor_sign": "မိန်"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:53",
+    "x": 267,
+    "y": 43,
+    "is_anchor": true,
+    "anchor_sign": "ကုမ်",
+    "anchor_index": 0,
+    "distance_to_nearest_anchor": null,
+    "nearest_anchor_sign": null
+  },
+  {
+    "timestamp": "2025-08-30 11:19:55",
+    "x": 207,
+    "y": 5,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 27.2,
+    "nearest_anchor_sign": "မိန်"
+  },
+  {
+    "timestamp": "2025-08-30 11:19:56",
+    "x": 249,
+    "y": 5,
+    "is_anchor": false,
+    "anchor_sign": null,
+    "anchor_index": null,
+    "distance_to_nearest_anchor": 17.89,
+    "nearest_anchor_sign": "မိန်"
+  }
+]
