@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-Import @DCharter import BurmeseGrid  # BurmeseGrid component ကို import လုပ်ပါ
+from DCharter import BurmeseGrid  # BurmeseGrid component ကို import လုပ်ပါ
 
 class ExampleApp:
     def __init__(self, toplevel):

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import math
-from DChart import BurmeseGrid  # Burm
+from DCharter import BurmeseGrid  # Burm
 
 class BurmeseAstrologyGrid:
     def __init__(self, parent, width=600, height=600, bg="white", rotation_angle =15):

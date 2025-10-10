@@ -36,7 +36,7 @@ class MyanmarTextTester(QMainWindow):
         
         # ဖောင့်ရွေးချယ်မှု အပိုင်း
         font_layout = QHBoxLayout()
-        font_label = QLabel("ဖောင့်:")
+        font_label = QLabel("ဖောင့်  :")
         self.font_combo = QComboBox()
         self.font_combo.addItems(self.myanmar_fonts)
         self.font_combo.currentTextChanged.connect(self.change_font)

@@ -2,7 +2,7 @@ import tkinter as tk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import numpy as np
-from  DChart import BurmeseGrid
+from  DCharter import BurmeseGrid
 
 plt.rcParams['font.family'] = 'Myanmar Text'  # For Windows; use 'Noto Sans Myanmar' on Linux/macOS
 

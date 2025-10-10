@@ -257,3 +257,8 @@ SIGN_MEMBERS = get_members(SIGNS)
 HOUSE_MEMBERS = get_members(HOUSES)
 EXTRA_MEMBERS = get_members(EXTRAS)
 VERTEX_MEMBERS = get_members(VERTICES)
+
+print(VERTEX_MEMBERS)
+print(PLANETS)
+print(ASPECTS)
+

@@ -5,7 +5,7 @@ class BurmeseGrid:
     """
     Tkinter canvas ကို အခြေခံပြီး မြန်မာဗေဒင်ဇယားကွက်ကို ဆွဲပေးသည့် component တစ်ခု။
     """
-    def __init__(self, parent, width=50, height=250, cell_size=250, bg="white"):
+    def __init__(self, parent, width=250, height=250, cell_size=30, bg="white"):
         self.canvas = tk.Canvas(parent, width=width, height=height, bg=bg)
         self.width = width
         self.height = height

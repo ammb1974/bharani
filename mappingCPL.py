@@ -10,7 +10,7 @@ class MarkerApp:
         # သတ်မှတ်ထားသော area များ (x, y, width, height)
         self.areas = [
             (100, 100, 200, 150),  # area 1
-            (400, 200, 150, 200),  # area 2
+            (400, 300, 150, 200),  # area 2
             (200, 400, 250, 100)   # area 3
         ]
         
