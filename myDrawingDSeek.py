@@ -8,44 +8,86 @@ class BurmeseGrid:
         self.height = height
         self.labels = {}
         
-    def draw_grid(self, center_x=250, center_y=250, cell_size=100):
+/*************  ✨ Windsurf Command 🌟  *************/
+    def draw_grid(self, center_x=10, center_y=10, cell_size=5):
         """Draw the complete grid with lines and default labels"""
+        vertical_line_1_x1 = center_x - cell_size
+        vertical_line_1_y1 = center_y - 2*cell_size
+        vertical_line_1_x2 = center_x - cell_size
+        vertical_line_1_y2 = center_y + 2*cell_size
         # Draw vertical lines
-        self.canvas.create_line(center_x - cell_size, center_y - 1.5*cell_size, 
-                               center_x - cell_size, center_y + 1.5*cell_size, 
+        self.canvas.create_line(center_x - cell_size, center_y - 2*cell_size, 
+                               center_x - cell_size, center_y + 2*cell_size, 
                                fill="black", width=1)
-        self.canvas.create_line(center_x + cell_size, center_y - 1.5*cell_size, 
-                               center_x + cell_size, center_y + 1.5*cell_size, 
+        self.canvas.create_line(center_x + cell_size, center_y - 2*cell_size, 
+                               center_x + cell_size, center_y + 2*cell_size, 
                                fill="black", width=1)
         
+        vertical_line_2_x1 = center_x + cell_size
+        vertical_line_2_y1 = center_y - 2*cell_size
+        vertical_line_2_x2 = center_x + cell_size
+        vertical_line_2_y2 = center_y + 2*cell_size
         # Draw horizontal lines
-        self.canvas.create_line(center_x - 1.5*cell_size, center_y - cell_size, 
-                               center_x + 1.5*cell_size, center_y - cell_size, 
+        self.canvas.create_line(center_x - 2*cell_size, center_y - cell_size, 
+                               center_x + 2*cell_size, center_y - cell_size, 
                                fill="black", width=1)
-        self.canvas.create_line(center_x - 1.5*cell_size, center_y + cell_size, 
-                               center_x + 1.5*cell_size, center_y + cell_size, 
+        self.canvas.create_line(center_x - 2*cell_size, center_y + cell_size, 
+                               center_x + 2*cell_size, center_y + cell_size, 
                                fill="black", width=1)
         
+        horizontal_line_1_x1 = center_x - 2*cell_size
+        horizontal_line_1_y1 = center_y - cell_size
+        horizontal_line_1_x2 = center_x + 2*cell_size
+        horizontal_line_1_y2 = center_y - cell_size
         # Draw diagonal lines
-        self.canvas.create_line(center_x - 1.5*cell_size, center_y - 1.5*cell_size, 
+        self.canvas.create_line(center_x - 2*cell_size, center_y - 2*cell_size, 
                                center_x - cell_size, center_y - cell_size, 
                                fill="black", width=1)
-        self.canvas.create_line(center_x + 1.5*cell_size, center_y - 1.5*cell_size, 
+        self.canvas.create_line(center_x + 2*cell_size, center_y - 2*cell_size, 
                                center_x + cell_size, center_y - cell_size, 
                                fill="black", width=1)
         self.canvas.create_line(center_x - cell_size, center_y + cell_size, 
-                               center_x - 1.5*cell_size, center_y + 1.5*cell_size, 
+                               center_x - 2*cell_size, center_y + 2*cell_size, 
                                fill="black", width=1)
         self.canvas.create_line(center_x + cell_size, center_y + cell_size, 
-                               center_x + 1.5*cell_size, center_y + 1.5*cell_size, 
+                               center_x + 2*cell_size, center_y + 2*cell_size, 
                                fill="black", width=1)
         
+        horizontal_line_2_x1 = center_x - 2*cell_size
+        horizontal_line_2_y1 = center_y + cell_size
+        horizontal_line_2_x2 = center_x + 2*cell_size
+        horizontal_line_2_y2 = center_y + cell_size
         # Add default labels
         self.add_label("ရာသီ", center_x - cell_size/2, center_y - cell_size/2)
-       # self.add_label("ဘာဝ", center_x + cell_size/2, center_y - cell_size/2)
-        #self.add_label("နဝင်း", center_x, center_y)
+        self.add_label("ဘာဝ", center_x + cell_size/2, center_y - cell_size/2)
+        self.add_label("နဝင်း", center_x, center_y)
         
+        diagonal_line_1_x1 = center_x - 2*cell_size
+        diagonal_line_1_y1 = center_y - 2*cell_size
+        diagonal_line_1_x2 = center_x - cell_size
+        diagonal_line_1_y2 = center_y - cell_size
+        
+        diagonal_line_2_x1 = center_x + 2*cell_size
+        diagonal_line_2_y1 = center_y - 2*cell_size
+        diagonal_line_2_x2 = center_x + cell_size
+        diagonal_line_2_y2 = center_y - cell_size
+        
+        diagonal_line_3_x1 = center_x - cell_size
+        diagonal_line_3_y1 = center_y + cell_size
+        diagonal_line_3_x2 = center_x - 2*cell_size
+        diagonal_line_3_y2 = center_y + 2*cell_size
+        
+        diagonal_line_4_x1 = center_x + cell_size
+        diagonal_line_4_y1 = center_y + cell_size
+        diagonal_line_4_x2 = center_x + 2*cell_size
+        diagonal_line_4_y2 = center_y + 2*cell_size
+        
+        self.canvas.create_line(vertical_line_1_x1, vertical_line_1_y1, 
+                               vertical_line_1_x2, vertical_line_1_y2, 
+                               fill="black", width=1)
+        self.canvas.create_line(vertical_line_2_x1, vertical_line_2_y1, 
         return self
+/*******  933a00ff-985f-4189-997b-ee80a4588f63  *******/
     
     def add_label(self, text, x, y, font=("Myanmar Text", 13), fill="black"):
         """Add a text label to the grid"""
