@@ -1,2 +1,4 @@
 day,month,year,hour,minute,state,city,latitude,longitude,timezone,dst
 4,မတ်,1954,07,00,ရန်ကုန်,ရန်ကုန်,16.785278,96.136267,UTC+6.5,False
+4,မတ်,1954,07,00,ရန်ကုန်,ရန်ကုန်,16.785278,96.136267,UTC+6.5,False
+4,မတ်,1954,07,00,ရှမ်?,ရွ?ငံ,41.405324,2.17584,UTC+1.0,False
