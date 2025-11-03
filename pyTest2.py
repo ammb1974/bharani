@@ -3,10 +3,24 @@ from tkinter import ttk, messagebox, font
 import datetime
 from typing import Dict, List, Tuple
 import swisseph as swe
-import win32gui
-import win32con
 
 class BirthChartCalculator:
+    def create_context_menu(self):
+        self.context_menu = tk.Menu(self.toplevel, tearoff=0)
+        self.context_menu.add_command(label="Copy", command=self.copy_to_clipboard)
+
+    def show_context_menu(self, event):
+        try:
+            self.context_menu.tk_popup(event.x_root, event.y_root, 0)
+        finally:
+            self.context_menu.grab_release()
+
+    
+    def copy_to_clipboard(self):
+        text = self.output_text.get("1.0", "end-1c")  # Text widget မှ စာသားတိုက်ခတ် grab
+        self.toplevel.clipboard_clear()
+        self.toplevel.clipboard_append(text)
+        messagebox.showinfo("Copy", "ဇာတာရလဒ်များ Clipboard သို့ ကူးယူပြီးပါပြီ။")
     def __init__(self):
         swe.set_ephe_path(None)
         
@@ -192,6 +206,7 @@ class BirthChartApp:
         self.right_frame = tk.Frame(toplevel, bg="white", relief="sunken", bd=2)
         self.right_frame.pack(side="right", fill="both", expand=True)
         
+        
         # တည်ဆောက်ခြင်း
         self.create_input_widgets()
         self.create_output_widgets()
@@ -229,51 +244,55 @@ class BirthChartApp:
             self.mm_font = "TkDefaultFont"
     
     def create_input_widgets(self):
+        
+       
         # ခေါင်းစဉ်
         header = tk.Label(self.left_frame, text="မွေးနေ့ဇာတာအချက်အလက်များ", 
                          font=(self.mm_font, 14, "bold"), bg=self.frame_color, fg="#333")
         header.pack(pady=15)
         
         # User Name
-        tk.Label(self.left_frame, text="အမည်:", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
+        tk.Label(self.left_frame, text="အမည်   :", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
         self.user_name = tk.Entry(self.left_frame, font=(self.mm_font, 10), width=30)
         self.user_name.pack(padx=20, pady=(0,10), fill="x")
         
         # Birth Date
-        tk.Label(self.left_frame, text="မွေးသက္ကရာဇ် (YYYY-MM-DD):", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
+        tk.Label(self.left_frame, text="မွေးသက္ကရာဇ် (YYYY-MM-DD)  :", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
         self.birth_date = tk.Entry(self.left_frame, font=(self.mm_font, 10), width=30)
         self.birth_date.pack(padx=20, pady=(0,10), fill="x")
         self.birth_date.insert(0, "1990-05-15")
         
         # Birth Time
-        tk.Label(self.left_frame, text="မွေးချိန် (HH:MM):", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
+        tk.Label(self.left_frame, text="မွေးချိန် (HH:MM)   :", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
         self.birth_time = tk.Entry(self.left_frame, font=(self.mm_font, 10), width=30)
         self.birth_time.pack(padx=20, pady=(0,10), fill="x")
         self.birth_time.insert(0, "08:30")
         
         # Birth Place
-        tk.Label(self.left_frame, text="မွေးရာဒေသ:", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
+        tk.Label(self.left_frame, text="မွေးရာဒေသ   :", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
         self.birth_place = tk.Entry(self.left_frame, font=(self.mm_font, 10), width=30)
         self.birth_place.pack(padx=20, pady=(0,10), fill="x")
         self.birth_place.insert(0, "ရန်ကုန်မြို့")
         
         # Latitude
-        tk.Label(self.left_frame, text="လတ္တီကျုဒ် (Latitude):", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
+        tk.Label(self.left_frame, text="လတ္တီကျုဒ် (Latitude)  :", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
         self.latitude = tk.Entry(self.left_frame, font=(self.mm_font, 10), width=30)
         self.latitude.pack(padx=20, pady=(0,10), fill="x")
         self.latitude.insert(0, "16.8661")
         
         # Longitude
-        tk.Label(self.left_frame, text="လောင်ဂျီကျုဒ် (Longitude):", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
+        tk.Label(self.left_frame, text="လောင်ဂျီကျုဒ် (Longitude)   :", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
         self.longitude = tk.Entry(self.left_frame, font=(self.mm_font, 10), width=30)
         self.longitude.pack(padx=20, pady=(0,10), fill="x")
         self.longitude.insert(0, "96.1951")
         
         # Timezone
-        tk.Label(self.left_frame, text="အချိန်ဇုန် (Timezone):", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
+        tk.Label(self.left_frame, text="အချိန်ဇုန် (Timezone)   :", font=(self.mm_font, 10), bg=self.frame_color).pack(anchor="w", padx=20, pady=(10,0))
         self.timezone = tk.Entry(self.left_frame, font=(self.mm_font, 10), width=30)
         self.timezone.pack(padx=20, pady=(0,10), fill="x")
         self.timezone.insert(0, "+6.5")
+        
+      
         
         # Calculate Button
         self.calculate_btn = tk.Button(
@@ -290,13 +309,15 @@ class BirthChartApp:
             command=self.calculate_chart
         )
         self.calculate_btn.pack(pady=20, padx=20, fill="x")
-        
+       
         # အကူအညွှန်း
         help_text = "အကူအညွှန်း:\n- ရက်စွဲနှင့်အချိန်ကို မှန်ကန်စွာဖြည့်ပါ\n- Latitude/Longitude ကို decimal format ဖြင့်ဖြည့်ပါ\n- Myanmar အတွက် Timezone = +6.5"
         help_label = tk.Label(self.left_frame, text=help_text, font=(self.mm_font, 9), 
                              bg=self.frame_color, fg="#666", justify="left")
         help_label.pack(pady=10, padx=20, anchor="w")
     
+       
+
     def create_output_widgets(self):
         # ခေါင်းစဉ်
         header = tk.Label(self.right_frame, text="မွေးနေ့ဇာတာရလဒ်", 
@@ -318,6 +339,8 @@ class BirthChartApp:
             spacing3=5
         )
         self.output_text.pack(fill="both", expand=True, padx=20, pady=(0,20))
+        
+        
         
         # Scrollbar
         scrollbar = ttk.Scrollbar(self.output_text)

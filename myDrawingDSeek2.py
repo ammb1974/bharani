@@ -1,110 +1,125 @@
+import swisseph as swe
 import tkinter as tk
-from tkinter import ttk
+from datetime import datetime
+import math
 
-class BurmeseGrid:
-    def __init__(self, parent, width=200, height=200, bg="lightgray"):
-        self.canvas = tk.Canvas(parent, width=width, height=height, bg=bg)
-        self.width = width
-        self.height = height
-        self.center_x = width // 2
-        self.center_y = height // 2
-        self.cell_size = min(width, height) // 5
-        
-    def draw_grid(self, label_text):
-        """Draw the complete grid with lines and a single centered label"""
-        c_x, c_y = self.center_x, self.center_y
-        cell = self.cell_size
-        
-        # Draw vertical lines
-        self.canvas.create_line(c_x - cell, c_y - 1.5*cell, 
-                               c_x - cell, c_y + 1.5*cell, 
-                               fill="black", width=1)
-        self.canvas.create_line(c_x + cell, c_y - 1.5*cell, 
-                               c_x + cell, c_y + 1.5*cell, 
-                               fill="black", width=1)
-        
-        # Draw horizontal lines
-        self.canvas.create_line(c_x - 1.5*cell, c_y - cell, 
-                               c_x + 1.5*cell, c_y - cell, 
-                               fill="black", width=1)
-        self.canvas.create_line(c_x - 1.5*cell, c_y + cell, 
-                               c_x + 1.5*cell, c_y + cell, 
-                               fill="black", width=1)
-        
-        # Draw diagonal lines
-        self.canvas.create_line(c_x - 1.5*cell, c_y - 1.5*cell, 
-                               c_x - cell, c_y - cell, 
-                               fill="black", width=1)
-        self.canvas.create_line(c_x + 1.5*cell, c_y - 1.5*cell, 
-                               c_x + cell, c_y - cell, 
-                               fill="black", width=1)
-        self.canvas.create_line(c_x - cell, c_y + cell, 
-                               c_x - 1.5*cell, c_y + 1.5*cell, 
-                               fill="black", width=1)
-        self.canvas.create_line(c_x + cell, c_y + cell, 
-                               c_x + 1.5*cell, c_y + 1.5*cell, 
-                               fill="black", width=1)
-        
-        # Add the single centered label
-        self.canvas.create_text(c_x, c_y, text=label_text, 
-                               font=("Myanmar Text", 14, "bold"), fill="black")
-        
-        return self
-    
-    def pack(self, **kwargs):
-        self.canvas.pack(**kwargs)
-    
-    def grid(self, **kwargs):
-        self.canvas.grid(**kwargs)
-    
-    def place(self, **kwargs):
-        self.canvas.place(**kwargs)
+# Burmese zodiac sign names
+burmese_signs = [
+    "မိဿ", "ပြိဿ", "မေထုန်", "ကရကဋ်", "သိဟ်", "ကန်",
+    "တူ", "ဗြိစ္ဆာ", "ဓနု", "မကာရ", "ကုမ်", "မိန်",
+]
 
+planet_names = [
+    ("Sun", "နေ"), ("Moon", "လ"), ("Mars", "အင်္ဂါ"),
+    ("Mercury", "ဗုဒ္ဓဟူး"), ("Jupiter", "ကြာသပတေး"),
+    ("Venus", "သောကြာ"), ("Saturn", "စနေ"),
+    ("Rahu", "ရာဟု"), ("Ketu", "ကိတ်"),
+]
 
-class CenteredGridApplication:
-    def __init__(self, toplevel):
-        self.toplevel = toplevel
-        self.toplevel.title("Burmese Grid Application")
-        self.toplevel.geometry("700x400")
-        self.toplevel.configure(bg='white')
-        
-        # Configure styles
-        self.style = ttk.Style()
-        self.style.configure('TFrame', background='white')
-        self.style.configure('Header.TLabel', background='white', 
-                            font=('Pyidaungsu', 14, 'bold'))
-        
-        self.create_widgets()
-        
-    def create_widgets(self):
-        # Header
-        header = ttk.Frame(self.toplevel)
-        header.pack(fill=tk.X, padx=10, pady=10)
-        
-        ttk.Label(header, text="Burmese Grid System with Centered Labels", 
-                 style='Header.TLabel').pack(pady=5)
-        
-        # Main content area with three grids
-        main_frame = ttk.Frame(self.toplevel)
-        main_frame.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
-        
-        # Create three grid instances with different labels
-        self.grid1 = BurmeseGrid(main_frame, width=180, height=180)
-        self.grid2 = BurmeseGrid(main_frame, width=180, height=180)
-        self.grid3 = BurmeseGrid(main_frame, width=180, height=180)
-        
-        # Draw grids with centered labels
-        self.grid1.draw_grid("ရာသီ").grid(row=0, column=0, padx=10, pady=10)
-        self.grid2.draw_grid("ဘာဝ").grid(row=0, column=1, padx=10, pady=10)
-        self.grid3.draw_grid("နဝင်း").grid(row=0, column=2, padx=10, pady=10)
-        
-        # Add descriptive labels below each grid
-        ttk.Label(main_frame, text="Grid 1").grid(row=1, column=0)
-        ttk.Label(main_frame, text="Grid 2").grid(row=1, column=1)
-        ttk.Label(main_frame, text="Grid 3").grid(row=1, column=2)
+# --- Planet Position Calculation (This part remains the same) ---
+now = datetime.now()
+jd = swe.julday(now.year, now.month, now.day, now.hour + now.minute / 60.0)
+
+planet_codes = {
+    "Sun": swe.SUN, "Moon": swe.MOON, "Mars": swe.MARS,
+    "Mercury": swe.MERCURY, "Jupiter": swe.JUPITER, "Venus": swe.VENUS,
+    "Saturn": swe.SATURN,
+}
+
+planet_positions = {}
+rahu_pos = None
+
+for eng, mm in planet_names:
+    if eng in planet_codes:
+        pos = swe.calc_ut(jd, planet_codes[eng])[0][0]
+        idx = int(pos // 30)
+        planet_positions[mm] = idx
+    elif eng == "Rahu":
+        rahu_pos = swe.calc_ut(jd, swe.TRUE_NODE, swe.FLG_SWIEPH | swe.FLG_TRUEPOS)[0][0]
+        idx = int(rahu_pos // 30)
+        planet_positions[mm] = idx
+    elif eng == "Ketu":
+        if rahu_pos is not None:
+            ketu_pos = (rahu_pos + 180) % 360
+            idx = int(ketu_pos // 30)
+            planet_positions[mm] = idx
+
+# --- Canvas Drawing (Rewritten for the new grid design) ---
+root = tk.Tk()
+root.title("Burmese Astrology Chart (Grid)")
+
+canvas_width = 500
+canvas_height = 500
+canvas = tk.Canvas(root, width=canvas_width, height=canvas_height, bg='white')
+canvas.pack()
+
+# --- မောက်စ်အနေအထားပြဖို့ Label ---
+coord_label = tk.Label(root, text="Mouse X: 0, Y: 0", font=('Arial', 10), bd=1, relief=tk.SUNKEN, anchor=tk.W)
+coord_label.pack(fill=tk.X)
+
+def show_coords(event):
+    x, y = event.x, event.y
+    coord_label.config(text=f"Mouse X: {x}, Y: {y}")
+
+canvas.bind('<Motion>', show_coords)
 
 
-if __name__ == "__main__":
-    toplevel = tk.Tk()
-    app = CenteredGridApplication(toplevel)
-    toplevel.mainloop()
+# Define grid and margin
+margin = 50
+grid_size = 3
+grid_left = margin
+grid_top = margin
+grid_right = canvas_width - margin
+grid_bottom = canvas_height - margin
+cell_width = (grid_right - grid_left) / grid_size
+cell_height = (grid_bottom - grid_top) / grid_size
+
+# 1. Draw the outer square frame
+canvas.create_rectangle(grid_left, grid_top, grid_right, grid_bottom, outline="#888888", width=8)
+
+# 2. Draw the grid lines (vertical and horizontal)
+for i in range(1, grid_size):
+    # Vertical lines
+    x = grid_left + i * cell_width
+    canvas.create_line(x, grid_top, x, grid_bottom, fill='#888888',width=2)
+    # Horizontal lines
+    y = grid_top + i * cell_height
+    canvas.create_line(grid_left, y, grid_right, y, fill='#888888',width=2)
+
+# 3. Draw the center text
+center_x, center_y = canvas_width / 2, canvas_height / 2
+canvas.create_text(center_x, center_y, text="ရာသီ", font=('Arial', 18, 'bold'))
+
+# 4. Draw ONLY the specific diagonals requested by the user
+# အရင်ကလို အလိုလိုမဆွဲတော့ဘဲ သတ်မှတ်ထားတဲ့ အမှတ်တွေမှာပဲ ဆွဲပေးလိုက်တာဖြစ်ပါတယ်။
+canvas.create_line(50, 50, 183, 183, fill="#5D5C5C",width=2)
+canvas.create_line(318, 183, 450, 50, fill='#5D5C5C',width=2)
+canvas.create_line(183, 318, 50, 450, fill='#5D5C5C',width=2)
+canvas.create_line(318, 318, 450, 450, fill='#5D5C5C',width=2)
+
+
+# 5. Draw the zodiac signs around the perimeter
+sign_radius = (canvas_width / 2) - margin - 20
+for i, sign in enumerate(burmese_signs):
+    angle_deg = (i / 12) * 360 - 90
+    angle_rad = math.radians(angle_deg)
+    x = center_x + sign_radius * math.cos(angle_rad)
+    y = center_y + sign_radius * math.sin(angle_rad)
+    canvas.create_text(x, y, text=sign, font=('Myanmar Text', 14, 'bold'))
+
+# 6. Draw the planets inside the 8 outer grid cells
+cell_centers = []
+for row in range(grid_size):
+    for col in range(grid_size):
+        if not (row == 1 and col == 1): # Avoid the center cell
+            cx = grid_left + col * cell_width + cell_width / 2
+            cy = grid_top + row * cell_height + cell_height / 2
+            cell_centers.append((cx, cy))
+
+planets_to_place = list(planet_positions.keys())
+for i, planet_name in enumerate(planets_to_place):
+    if i < len(cell_centers):
+        x, y = cell_centers[i]
+        canvas.create_text(x, y, text=planet_name, font=('Myanmar Text', 12), fill='blue')
+
+root.mainloop()

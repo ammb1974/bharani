@@ -164,6 +164,7 @@ class BirthChartCalculator:
                 print(f"  {name:10s}: {sign:10s} {degree:5.2f}° (House {house}) {retrograde}")
         
         print("\n" + "="*50)
+ 
 
 # အသုံးပြုပုံဥပမာ
 if __name__ == "__main__":
@@ -172,15 +173,15 @@ if __name__ == "__main__":
     
     # မွေးနေ့ဇာတာ တွက်ချက်ခြင်း (ဥပမာ: ရန်ကုန်မြို့ ၁၉၉၀ ခုနှစ် မေလ ၁၅ ရက် နံနက် ၈:၃၀)
     birth_chart = calculator.calculate_birth_chart(
-        year=1990,
-        month=5,
-        day=15,
-        hour=8,
-        minute=30,
-        latitude=16.8661,  # ရန်ကုန်မြို့ လတ္တီကျုဒ်
-        longitude=96.1951,  # ရန်ကုန်မြို့ လောင်ဂျီကျုဒ်
+        year=1974,
+        month=6,
+        day=16,
+        hour=21,
+        minute=55,
+        latitude=22.5437,  # ကျောက်မဲ လတ္တီကျုဒ်
+        longitude=97.0337,  # ကျောက်မဲ လောင်ဂျီကျုဒ်
         timezone=6.5,  # မြန်မာစံတော်ချိန်
-        house_system='P'  # Placidus စနစ်
+        house_system='V'  # Vehlow Equal House စနစ်
     )
     
     # ရလဒ်ကို ပုံနှိပ်ခြင်း

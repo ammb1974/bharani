@@ -205,15 +205,15 @@ class BurmeseGrid:
             "Sun": "☉",
             "Moon": "☽",
             "Mercury": "☿",
-            "Venus": "♃",  # Note: သင့်မှာ Venus ကို ♃ (Jupiter သင်္ကေတ) ထားတာ မှားနိုင်ပါတယ်
+            "Venus": "♀",  
             "Mars": "♂",
-            "Jupiter": "♀",  # ဒါလည်း မှားနေနိုင်ပါတယ်
+            "Jupiter": "♃", 
             "Saturn": "♄",
             "Uranus": "♅",
             "Neptune": "♆",
             "Pluto": "♇",
-            "True Node": "H",
-            "Mean Node": "M"  # Added for Mean Node
+            "True Node": "☊",
+            "Mean Node": "☋"
         }
 
         # Bind mouse click event
@@ -396,8 +396,8 @@ class BurmeseGrid:
             "Uranus": "♅",
             "Neptune": "♆",
             "Pluto": "♇",
-            "True Node": "H",
-            "Mean Node": "M"  # Added
+            "True Node": "☊",
+            "Mean Node": "☋"  # Added
 }
         # Bind mouse click event
         self.canvas.bind("<Button-1>", self.on_click)
