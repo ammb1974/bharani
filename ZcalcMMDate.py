@@ -37,9 +37,9 @@ def gregorian_to_myanmar(gy, gm, gd):
     MO_EPOCH = 1954168.0506
     SY = 365.258756481
     me = math.floor((jd - MO_EPOCH) / SY)
-    be = me #+ 791
+    be = me  # ✅ မှန်ကန်: ME ပင် မြန်မာခုနှစ်ဖြစ်ပါသည်
 
-    # Year adjustment
+    # နှစ်ညှိရန်
     if jd < myanmar_new_year_jd(me):
         me -= 1
         be -= 1
@@ -48,41 +48,36 @@ def gregorian_to_myanmar(gy, gm, gd):
         be += 1
 
     watat = be in WATAT_YEARS
-    first_day = myanmar_new_year_jd(me)
-    day_of_year = jd - first_day + 1
+    first_day = myanmar_new_year_jd(me)  # တန်ခူး လစ JD
 
-    # Build months with start JD
+    # လများကို တစ်လချင်း တည်ဆောက်ပါ
     months = []
     current_jd = first_day
     for i in range(12):
-        days = 29 + (i % 2)
-        if i == 11:  # နှစ်ကုန်လ
-            if watat:
-                days = 30
-            else:
-                days = 29
-        months.append(('normal', i + 1, current_jd, days))
+        if i == 11:  # တပေါင်း (လ 12)
+            days = 30 if watat else 29
+        else:
+            days = 30 if (i % 2 == 0) else 29  # 1,3,5,7,9,11 → 30; 2,4,6,8,10 → 29
+        months.append((i + 1, current_jd, days))
         current_jd += days
 
     if watat:
-        # Insert ဝါထပ်လ after Waso (month 4 → index 3)
-        waso_end_jd = months[3][2] + months[3][3]
-        months.insert(4, ('leap', 4, waso_end_jd, 30))
+        # ဝါထပ်လကို ဝါဆို (လ 4) နောက်တွင် ထည့်ပါ
+        waso_end = months[3][1] + months[3][2]
+        months.insert(4, (4, waso_end, 30))
 
-    # Find correct month
-    for m_type, m_num, m_start, m_len in months:
+    # မှန်ကန်သော လကို ရှာပါ
+    for m_num, m_start, m_len in months:
         if jd < m_start + m_len:
-            # လပြည့်နေ့ = လစ + 14 (အများအားဖြင့်)
-            full_moon_jd = m_start + 14
-            # တစ်ခါတလေ 15 ဖြစ်နိုင်သော်လည်း Yan9a နှင့် ကိုက်ညီအောင် 14 သုံးပါမည်
+            full_moon_jd = m_start + 14  # လပြည့်နေ့
             if jd <= full_moon_jd:
                 day_str = f"လဆန်း {int(jd - m_start + 1)} ရက်"
             else:
                 day_str = f"လဆုတ် {int(jd - full_moon_jd)} ရက်"
-            return be, m_num, day_str, (m_type == 'leap'), watat
+            is_leap = (m_num == 4 and len(months) > 12 and m_start == waso_end)
+            return be, m_num, day_str, is_leap, watat
 
-    # Fallback
-    return be, 12, f"ရက် {int(day_of_year)}", False, watat
+    return be, 12, f"ရက် {int(jd - first_day + 1)}", False, watat
 
 # === GUI ===
 def convert_date():
@@ -134,21 +129,21 @@ root.resizable(False, False)
 root.configure(bg="#f8f9fa")
 
 tk.Label(root, text="Gregorian → မြန်မာ ပြက္ခဒိန်", 
-         font=("ZPyidaungsu", 12, "bold"), bg="#f8f9fa", fg="#1e3a8a").pack(pady=15)
+         font=("pyidaungsu", 11, "bold"), bg="#f8f9fa", fg="#1e3a8a").pack(pady=15)
 
 frame = tk.Frame(root, bg="#f8f9fa")
 frame.pack(pady=10)
 
 tk.Label(frame, text="နှစ် (YYYY):", bg="#f8f9fa").grid(row=0, column=0, padx=5, pady=5, sticky="e")
-year_entry = tk.Entry(frame, width=12, font=("Pyidaungsu", 11))
+year_entry = tk.Entry(frame, width=12, font=("pyidaungsu", 11))
 year_entry.grid(row=0, column=1)
 
 tk.Label(frame, text="လ (MM):", bg="#f8f9fa").grid(row=1, column=0, padx=5, pady=5, sticky="e")
-month_entry = tk.Entry(frame, width=12, font=("Pyidaungsu", 11))
+month_entry = tk.Entry(frame, width=12, font=("pyidaungsu", 11))
 month_entry.grid(row=1, column=1)
 
 tk.Label(frame, text="ရက် (DD):", bg="#f8f9fa").grid(row=2, column=0, padx=5, pady=5, sticky="e")
-day_entry = tk.Entry(frame, width=12, font=("Pyidaungsu", 11))
+day_entry = tk.Entry(frame, width=12, font=("pyidaungsu", 11))
 day_entry.grid(row=2, column=1)
 
 today = datetime.today()
@@ -157,12 +152,12 @@ month_entry.insert(0, str(today.month))
 day_entry.insert(0, str(today.day))
 
 tk.Button(root, text="ပြောင်းပြပါ", command=convert_date,
-          font=("Pyidaungsu", 11, "bold"), bg="#3b82f6", fg="white", padx=20, pady=6).pack(pady=15)
+          font=("pyidaungsu", 11, "bold"), bg="#3b82f6", fg="white", padx=20, pady=6).pack(pady=15)
 
-result_label = tk.Label(root, text="", font=("Pyidaungsu", 11), bg="#f8f9fa", justify="left")
+result_label = tk.Label(root, text="", font=("pyidaungsu", 11), bg="#f8f9fa", justify="left")
 result_label.pack(pady=15)
 
 tk.Label(root, text="Yan9a နှင့် ကိုက်ညီ | လပြည့်နေ့အပေါ် မူတည်၍ လဆန်း/လဆုတ် ဖော်ပြ", 
-         bg="#f8f9fa", fg="gray", font=("Pyidaungsu", 9)).pack(side="bottom", pady=10)
+         bg="#f8f9fa", fg="gray", font=("Arial", 9)).pack(side="bottom", pady=10)
 
 root.mainloop()
