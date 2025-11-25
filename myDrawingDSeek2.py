@@ -1,4 +1,4 @@
-import swisseph as swe
+import pyswisseph as swe
 import tkinter as tk
 from datetime import datetime
 import math
